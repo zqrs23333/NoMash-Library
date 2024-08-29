@@ -33,3 +33,7 @@ a,
     padding: 0 2rem;
   }
 }
+
+#suburb {
+  width: 100%;  /* 确保输入框宽度全满 */
+}

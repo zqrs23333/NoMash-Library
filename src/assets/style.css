@@ -4,3 +4,7 @@ h1 {
   margin-top: 20px;
   text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
+
+#suburb {
+  width: 100%;  /* 确保输入框宽度全满 */
+}
