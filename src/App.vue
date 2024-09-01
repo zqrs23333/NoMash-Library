@@ -10,8 +10,6 @@ import BHeader from './components/BHeader.vue'
     </header>
 
   <main class = "main-box">
-    <!-- <JSONLab /> -->
-    <!-- <RegistrationForm /> -->
     <router-view></router-view>
 
   </main>
@@ -24,7 +22,7 @@ import BHeader from './components/BHeader.vue'
   max-width: 80vw;
   margin: 0 auto;
   padding: 20px;
-  /* background-color: #e0bfbf; */
+
   border-radius: 10px;
 }
 

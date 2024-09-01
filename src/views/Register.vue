@@ -42,11 +42,11 @@ const submitForm = () => {
   validatePassword(true)
   validateConfirmPassword(true)
   validateReason(true)
-  validateage(true)
+  validateAge(true)
 
   
   if (!errors.value.username && !errors.value.password && !errors.value.confirmPassword && !errors.value.reason && !errors.value.age) { 
-    const secretKey = 'your-secret-key';
+    const secretKey = 'secret';
 
     const encryptedPassword = CryptoJS.AES.encrypt(formData.value.password, secretKey).toString();
 const encryptedConfirmPassword = CryptoJS.AES.encrypt(formData.value.confirmPassword, secretKey).toString();
@@ -62,16 +62,15 @@ const newUser = {
   userType:formData.value.userType,
 };
 
-    // 从 localStorage 中获取已注册的用户列表
+    
     let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
     
-    // 将新用户添加到用户列表中
+
     users.push(newUser);
     
-    // 将更新后的用户列表存储回 localStorage
+    // store back localStorage
     localStorage.setItem('registeredUsers', JSON.stringify(users));
 
-    // 同时将新用户添加到前端显示的 submittedCards 列表中
     submittedCards.value.push(newUser);
     clearForm()
     router.push('/SuccessRegister') 
@@ -96,7 +95,8 @@ const errors = ref({
   confirmPassword: null,
   resident: null,
   gender: null,
-  reason: null
+  reason: null,
+  age: null
 })
 
 const validateName = (blur) => {
@@ -111,10 +111,10 @@ const validateName = (blur) => {
   }
 }
 
-const validateage = (blur) => {
-  
-  if (Number(formData.value.age) < 18 || Number(formData.value.age) > 150) {
-    if (blur) errors.value.age = 'AGE must be at normal between 18 and 150'
+const validateAge = (blur) => {
+  const age = Number(formData.value.age);
+  if (isNaN(age) || age < 18 || age > 150) {
+    if (blur) errors.value.age = 'Age must be at normal, between 18 and 150'
   } else {
     errors.value.age= null
   }
@@ -225,10 +225,11 @@ loadUsers()
               min="0"
               max="150"
               step="1"
-              @blur="() => validateage(true)"
-                @input="() => validateage(false)"
+              @blur="() => validateAge(true)"
+              @input="() => validateAge(false)"
               oninput="this.value = this.value.replace(/[^0-9]/g, '')"
             />
+            <div v-if="errors.age" class="text-danger">{{ errors.age }}</div>
           </div>
 
           <div class="row col-12 col-md-10">

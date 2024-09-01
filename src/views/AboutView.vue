@@ -52,14 +52,14 @@ const createPost = () => {
 
 const likePost = (postId) => {
   const post = posts.value.find(post => post.id === postId);
-  const user = localStorage.getItem('currentUser'); // 获取当前登录用户
+  const user = localStorage.getItem('currentUser'); 
 
-  console.log('LikedBy:', post.likedBy); // 打印出点赞用户列表
-  console.log('Current User:', user); // 打印出当前用户
+  console.log('LikedBy:', post.likedBy); 
+  console.log('Current User:', user); 
 
   if (post && user && !post.likedBy.includes(user)) { 
     post.likes += 1;
-    post.likedBy.push(user); // 记录点赞用户
+    post.likedBy.push(user); 
     console.log('User liked the post:', user);
   } else {
     alert("You have already liked this post!");
@@ -75,7 +75,7 @@ const loadPosts = () => {
   if (savedPosts) {
     posts.value = JSON.parse(savedPosts);
   } else {
-    posts.value = []; // 如果没有保存的帖子，初始化为空数组
+    posts.value = []; 
   }
 };
 

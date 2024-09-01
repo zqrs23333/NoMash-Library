@@ -22,7 +22,7 @@
       <div class="ml-auto" v-if="!isAuthenticated" >
           <router-link to="/login" class="btn btn-outline-secondary" >Login</router-link>
         </div>
-      <div v-if="isAuthenticated" class="ml-auto"> <!-- 使用 ml-auto 将按钮推到右边 -->
+      <div v-if="isAuthenticated" class="ml-auto"> 
         <button @click="logout" class="btn btn-outline-secondary">Logout</button>
       </div>
     </header>
@@ -33,7 +33,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-// 管理用户的认证状态
+
 const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true')
 const isAdmin = ref(localStorage.getItem('isAdmin') === 'true')
 const router = useRouter()
@@ -43,7 +43,7 @@ const logout = () => {
   localStorage.removeItem('isAdmin')
   isAuthenticated.value = false
   router.push('/login').then(() => {
-    router.go(0) // 强制刷新页面，确保导航栏更新
+    router.go(0) 
   })
 }
 

@@ -25,7 +25,7 @@
               <li class="list-group-item">Username: {{ card.username }}</li>
               <li class="list-group-item">Password: {{ card.password }}</li>
               <li class="list-group-item">
-                Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}
+                Australian Resident: {{ card.isAustralian}}
               </li>
               <li class="list-group-item">Gender: {{ card.gender }}</li>
               <li class="list-group-item">Reason: {{ card.reason }}</li>
@@ -43,10 +43,10 @@
   import { ref, computed } from 'vue'
   import CryptoJS from 'crypto-js';
   
-  // 定义密钥
-  const secretKey = 'your-secret-key'
   
-  // 从 localStorage 中加载用户数据并解密
+  const secretKey = 'secret'
+  
+ 
   const users = ref(JSON.parse(localStorage.getItem('registeredUsers')) || [])
   
   const decryptedUsers = computed(() => {

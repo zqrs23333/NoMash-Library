@@ -26,8 +26,8 @@ const createDefaultAdmin = () => {
       age: '35',
       userType: 'admin'
     };
-    //localStorage.clear();
-    const secretKey = 'your-secret-key';
+
+    const secretKey = 'secret';
  
         adminData.password = CryptoJS.AES.encrypt(adminData.password, secretKey).toString();
        
@@ -44,5 +44,5 @@ const createDefaultAdmin = () => {
     
   }
   
-  // 调用函数以创建默认管理员
+  
   createDefaultAdmin();

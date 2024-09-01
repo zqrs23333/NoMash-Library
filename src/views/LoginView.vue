@@ -2,15 +2,15 @@
   <div class="login-container">
     <h2>Login</h2>
     <form @submit.prevent="login">
-      <div class="col-12 col-md-11">
+      <div class="col-12 col-md-12">
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" v-model="username" required />
       </div>
-      <div class="col-12 col-md-11">
+      <div class="col-12 col-md-12">
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" v-model="password" required />
       </div>
-      <div class="col-12 col-md-11">
+      <div class="col-12 col-md-12">
         <label for="userType" class="form-label">User type</label>
         <select class="form-select" type="userType" v-model="userType" required>
           <option value="user">User</option>
@@ -38,7 +38,7 @@ const userType = ref('user')
 
 const login = () => {
   const users = JSON.parse(localStorage.getItem('registeredUsers')) || []
-  const secretKey = 'your-secret-key';
+  const secretKey = 'secret';
 
 
   const user = users.find(user => user.username === username.value && user.userType === userType.value)
