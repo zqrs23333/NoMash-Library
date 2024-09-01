@@ -29,7 +29,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import CryptoJS from 'crypto-js';
 
-// 用户输入的数据
+
 const username = ref('')
 const password = ref('')
 const loginError = ref(null)
@@ -40,7 +40,7 @@ const login = () => {
   const users = JSON.parse(localStorage.getItem('registeredUsers')) || []
   const secretKey = 'your-secret-key';
 
-  // 通过用户名查找用户
+
   const user = users.find(user => user.username === username.value && user.userType === userType.value)
 
   if (user) {
