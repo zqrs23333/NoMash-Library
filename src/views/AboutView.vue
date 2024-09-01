@@ -1,8 +1,7 @@
 <template>
     <div>
-      <h1>About Our Library</h1>
-      <p>Welcome to our digital library! Only authenticated users can see this page.</p>
-      <button @click="logout">Logout</button>
+      <h1>About Our internet</h1>
+      <p>Welcome to our forum! Only authenticated users can see this page.And welcome to post here</p>
     </div>
   </template>
   
@@ -11,10 +10,6 @@
   
   const router = useRouter()
   
-  const logout = () => {
-    localStorage.removeItem('isAuthenticated')
-    router.push('/login')
-  }
 
   
   </script>

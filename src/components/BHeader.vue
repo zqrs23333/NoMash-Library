@@ -2,23 +2,29 @@
   <!-- Using Bootstrap's Header template (starter code) -->
   <!-- https://getbootstrap.com/docs/5.0/examples/headers/ -->
   <div class="container">
-    <header class="d-flex justify-content-center py-3">
-      <ul class="nav nav-pills">
+    <header class="d-flex align-items-center justify-content-between py-3">
+      <img src="@/assets/logo.png" alt="Logo" class="logo-img me-3">
+      <ul class="nav nav-pills mx-auto"> 
         <li class="nav-item">
-          <router-link to="/" class="nav-link" active-class="active" aria-current="page"
-            >Home (Week 5)</router-link
-          >
+          <router-link to="/" class="nav-link" active-class="active" aria-current="page">Home</router-link>
         </li>
         <li class="nav-item" v-if="!isAuthenticated">
+          <router-link to="/register" class="nav-link" active-class="active" aria-current="page">Register</router-link>
+        </li>
+        <li class="nav-item" v-if="isAuthenticated">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
-
         <li class="nav-item" v-if="!isAuthenticated">
-          <router-link to="/login" class="nav-link" active-class="active">Login</router-link>
+          <router-link to="/manager" class="nav-link" active-class="active" aria-current="page">Manager</router-link>
         </li>
-
-
       </ul>
+      
+      <div class="ml-auto" v-if="!isAuthenticated" >
+          <router-link to="/login" class="btn btn-outline-secondary" >Login</router-link>
+        </div>
+      <div v-if="isAuthenticated" class="ml-auto"> <!-- 使用 ml-auto 将按钮推到右边 -->
+        <button @click="logout" class="btn btn-outline-secondary">Logout</button>
+      </div>
     </header>
   </div>
 </template>
@@ -29,13 +35,26 @@ import { useRouter } from 'vue-router'
 
 // 管理用户的认证状态
 const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true')
+const isAdmin = ref(localStorage.getItem('isAdmin') === 'true')
 const router = useRouter()
 
 const logout = () => {
   localStorage.removeItem('isAuthenticated')
   isAuthenticated.value = false
-  router.push('/login')
+  router.push('/login').then(() => {
+    router.go(0) // 强制刷新页面，确保导航栏更新
+  })
 }
+
+const login = () => {
+  // 登录逻辑...
+  localStorage.setItem('isAuthenticated', 'true')
+  isAuthenticated.value = true
+  router.push('/about').then(() => {
+    router.go(0) // 刷新页面以确保 BHeader 立即更新
+  })
+}
+
 </script>
 
 <style scoped>
@@ -72,5 +91,14 @@ const logout = () => {
 
 .dropdown-toggle {
   outline: 0;
+}
+
+.logout-botton {
+  margin-left: auto;
+}
+.logo-img {
+  height: 60px; 
+  width: auto;  
+
 }
 </style>
