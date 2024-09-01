@@ -28,9 +28,9 @@ const createDefaultAdmin = () => {
     };
     //localStorage.clear();
     const secretKey = 'your-secret-key';
-        // 对 adminData 的密码进行加密
+ 
         adminData.password = CryptoJS.AES.encrypt(adminData.password, secretKey).toString();
-        // 由于 adminData 不包含 confirmPassword，你可以直接将 password 赋值给 confirmPassword
+       
         adminData.confirmPassword = adminData.password;
 
         if (localStorage.getItem('ifcreate') !== 'true') {

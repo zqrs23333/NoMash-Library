@@ -1,7 +1,7 @@
 <template>
   <!-- Using Bootstrap's Header template (starter code) -->
   <!-- https://getbootstrap.com/docs/5.0/examples/headers/ -->
-  <div class="container">
+  <div class="container col-12 col-md-6">
     <header class="d-flex align-items-center justify-content-between py-3">
       <img src="@/assets/logo.png" alt="Logo" class="logo-img me-3">
       <ul class="nav nav-pills mx-auto"> 
@@ -14,7 +14,7 @@
         <li class="nav-item" v-if="isAuthenticated">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
-        <li class="nav-item" v-if="!isAuthenticated">
+        <li class="nav-item" v-if="isAdmin">
           <router-link to="/manager" class="nav-link" active-class="active" aria-current="page">Manager</router-link>
         </li>
       </ul>
@@ -40,18 +40,10 @@ const router = useRouter()
 
 const logout = () => {
   localStorage.removeItem('isAuthenticated')
+  localStorage.removeItem('isAdmin')
   isAuthenticated.value = false
   router.push('/login').then(() => {
     router.go(0) // 强制刷新页面，确保导航栏更新
-  })
-}
-
-const login = () => {
-  // 登录逻辑...
-  localStorage.setItem('isAuthenticated', 'true')
-  isAuthenticated.value = true
-  router.push('/about').then(() => {
-    router.go(0) // 刷新页面以确保 BHeader 立即更新
   })
 }
 

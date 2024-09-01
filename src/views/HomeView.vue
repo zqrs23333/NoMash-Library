@@ -1,11 +1,11 @@
 <template>
-    <div class="container mt-5 text-center">
+    <div class="container mt-5 text-center col-12 col-md-11">
       <div class="content-box text-center p-4">
         <h1>Welcome to Dusk Senior Network!</h1>
         <p class="lead">Discover how your peers are rating their teachers and share your own experiences to help others make informed decisions.</p>
         <button @click="handleButtonClick" class="btn btn-primary btn-lg mt-4">Start Right Now...</button>
       </div>
-      <div class="mt-5">
+      <div class="mt-5 col-12 col-md-11">
             <p>Dusk Senior Network - Helping the elder people and give the help with them and their family member.</p>
             <p>Built with <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> by the qirui Zhang.</p>
         </div>

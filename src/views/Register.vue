@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import CryptoJS from 'crypto-js';
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const formData = ref({
   username: '',
   password: '',
@@ -72,6 +74,7 @@ const newUser = {
     // 同时将新用户添加到前端显示的 submittedCards 列表中
     submittedCards.value.push(newUser);
     clearForm()
+    router.push('/SuccessRegister') 
   }
 }
 
@@ -156,12 +159,12 @@ loadUsers()
 
   <div class="container mt-5">
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+      <div class="col-12 col-md-10">
         <h1 class="text-center">🗄️Registration Form</h1>
         <form @submit.prevent="submitForm">
 
-          <div class="row mb-3">
-            <div class="col-md-6 col-sm-6">
+          <div class="row col-12 col-md-10">
+            <div class="col-12 col-md-10">
               <label for="username" class="form-label">Username</label>
               <input
                 type="text"
@@ -174,7 +177,7 @@ loadUsers()
               <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
             </div>
             
-            <div class="col-md-6 col-sm-6">
+            <div class="col-12 col-md-10">
               <label for="gender" class="form-label">Gender</label>
               <select class="form-select" id="gender" v-model="formData.gender" required>
                 <option value="male">Male</option>
@@ -183,7 +186,7 @@ loadUsers()
               </select>
             </div>
 
-            <div class="col-md-6 col-sm-6">
+            <div class="col-12 col-md-10">
               <label for="password" class="form-label">Password</label>
               <input
                 type="password"
@@ -196,7 +199,7 @@ loadUsers()
               <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
             </div>
             
-            <div class="col-md-6 col-sm-6">
+            <div class="col-12 col-md-10">
               <label for="confirm-password" class="form-label">Confirm password</label>
               <input
                 type="password"
@@ -212,8 +215,8 @@ loadUsers()
 
           </div>
 
-          <div class="mb-3">
-            <label for="age" class="form-label">Age</label>
+          <div class="col-12 col-md-10">
+            <label for="age" class="form-label col-12 col-md-6">Age</label>
             <input
               type="number"
               class="form-control"
@@ -228,9 +231,9 @@ loadUsers()
             />
           </div>
 
-          <div class="row mb-3">
+          <div class="row col-12 col-md-10">
             <div class="col-md-6 col-sm-6">
-              <div class="form-check">
+              <div class="form-check col-12 col-md-6">
                 <input
                   type="checkbox"
                   class="form-check-input"
@@ -243,7 +246,7 @@ loadUsers()
     
           </div>
 
-          <div class="mb-3">
+          <div class="col-12 col-md-10">
             <label for="reason" class="form-label">Reason for joining</label>
             <textarea
               class="form-control"
@@ -257,7 +260,7 @@ loadUsers()
             </div>
 
           </div>
-            <div class="text-center">
+            <div class="text-center col-12 col-md-10">
             <button type="submit" class="btn btn-primary me-2" @click = "submitForm">Submit</button>
             <button type="button" class="btn btn-secondary" @click="clearForm">Clear</button>
           </div>

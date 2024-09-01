@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import AccessDenied from '../views/AccessDenied.vue'
 import HomeView from '../views/HomeView.vue'
 import ManageView from '../views/ManageView.vue'
+import SuccessRegisterView from '../views/SuccessRegisterView.vue'
 
 const routes = [
   {
@@ -33,9 +34,14 @@ const routes = [
     component: AccessDenied
   },
   {
-    path: '/manager',   // 新的路由路径
+    path: '/manager',   
     name: 'Manager',
     component: ManageView
+  },
+  {
+    path: '/SuccessRegister',   
+    name: 'SuccessRegister',
+    component: SuccessRegisterView
   }
 
 ]
@@ -47,15 +53,25 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'
+  const isAdmin= localStorage.getItem('isAdmin') === 'true'
 
-  // 定义可以未登录访问的路由名称列表
-  const publicPages = ['Login', 'Register','Home','Manager']
+  const publicPages = ['Login', 'Register','Home','SuccessRegister']
+  const managerPages = ['Manager']
 
+  if (managerPages.includes(to.name)) {
+    if (isAdmin) {
+      next(); 
+    } else {
+      next('/'); 
+    }
+    return;
+  }
+  
   if (!isAuthenticated && !publicPages.includes(to.name)) {
-    // 如果用户未登录且尝试访问非公开页面，重定向到登录页面
+    
     next('/')
   } else {
-    // 否则允许访问
+    
     next()
   }
 })
